@@ -15,6 +15,8 @@ MOD = -J$(BUILD)
 print_vars:
 	@echo $(SRC)
 	@echo $(OBJ)
+	@echo $(OS)
+	@echo rm -r $(BUILD)\* $(OBJF)\*
 	
 all: $(MAIN)
 
@@ -30,4 +32,8 @@ $(OBJF)/StringModule.o: $(SRCF)/StringModule.f90
 .PHONY: clean
 	
 clean:
-	rm -r $(BUILD)/* $(OBJF)/*
+	ifeq ($(OS),Windows_NT)
+		rm -r $(BUILD)\* $(OBJF)\*
+	else
+		rm -r $(BUILD)/* $(OBJF)/*
+	endif	
