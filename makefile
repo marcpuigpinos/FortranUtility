@@ -16,24 +16,30 @@ print_vars:
 	@echo $(SRC)
 	@echo $(OBJ)
 	@echo $(OS)
-	@echo rm -r $(BUILD)\* $(OBJF)\*
+	@echo rm -r $(BUILD)\* $(OBJF)\*	
 	
 all: $(MAIN)
 
 $(MAIN): $(OBJ)
+	@echo Linking the library...
 	ar -crs $(MAIN) $(OBJ)
 
 $(OBJF)/DataTypeModule.o: $(SRCF)/DataTypeModule.f90
+	@echo ... Compiling DataTypeModule ...
 	$(FC) $(FFLAGS) $(MOD) $(SRCF)/DataTypeModule.f90 -o $(OBJF)/DataTypeModule.o
 	
 $(OBJF)/StringModule.o: $(SRCF)/StringModule.f90
+	@echo ... Compiling DataTypeModule ...
 	$(FC) $(FFLAGS) $(MOD) $(SRCF)/StringModule.f90 -o $(OBJF)/StringModule.o	
 
 .PHONY: clean
 	
 clean:
-	ifeq ($(OS),Windows_NT)
-		rm -r $(BUILD)\* $(OBJF)\*
-	else
-		rm -r $(BUILD)/* $(OBJF)/*
-	endif	
+	@echo ... Cleaning workspace ...
+	rm -r $(BUILD)/* $(OBJF)/*
+
+.PHONY: clean_win
+
+clean_win:
+	@echo ... Cleaning workspace ...
+	del /F /Q $(BUILD)\* $(OBJF)\*
