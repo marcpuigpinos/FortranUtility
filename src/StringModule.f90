@@ -80,10 +80,10 @@ module fu_mString
         module procedure productScalarString_fu_mString
     end interface
 
-!    interface operator(-)
-!        module procedure substractionStringCharacter_fu_mString
-!        module procedure substractionStringString_fu_mString
-!    end interface
+    interface operator(-)
+        module procedure substractionStringCharacter_fu_mString
+        module procedure substractionStringString_fu_mString
+    end interface
 
     interface write
         module procedure writeOnScreen_fu_mString
@@ -183,6 +183,39 @@ contains
         type(fu_string)               :: sproduct
 
         sproduct = productStringScalar_fu_mString(string, scalar)
+    end function
+    
+    function substractionStringCharacter_fu_mString(string, text) result(resString)
+        type(fu_string), intent(in)  :: string
+        character(len=*), intent(in) :: text
+        type(fu_string)              :: resString
+        character(len=string%length) :: auxText
+        integer(fu_itype)            :: nchar, ichar
+        
+        resString = fu_string(string%text)
+        nchar = len_trim(text)
+        if (nchar < 1) return
+        if (nchar > string%length) return
+        resString = fu_string()
+        ichar = 1
+        auxText = ""
+        do
+            if (ichar > string%length-nchar) exit
+            if (string%text(ichar:ichar+nchar) == text) then
+                ichar = ichar + nchar
+            else
+                auxText = auxText//string%text(ichar:ichar)
+            endif
+            ichar = ichar + 1
+        enddo
+        resString = fu_string(auxText)
+    end function
+    
+    function substractionStringString_fu_mString(string1, string2) result(resString)
+        type(fu_string), intent(in)  :: string1, string2
+        type(fu_string)              :: resString    
+        
+        resString = substractionStringCharacter_fu_mString(string1, string2%text)
     end function
 
     subroutine writeOnScreen_fu_mString(string)
