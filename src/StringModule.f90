@@ -10,7 +10,7 @@ module fu_mString
 
     public :: fu_string
 
-    public :: assignment(=), operator(==)
+    public :: assignment(=), operator(==), operator(+), operator(*), operator(-), write
 
     character(len=28), parameter :: upperAlphabet = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
     character(len=28), parameter :: lowerAlphabet = "abcdefghijklmnñopqrstuvwxyz"
@@ -66,7 +66,8 @@ module fu_mString
     end interface
 
     interface operator(==)
-        module procedure equal_fu_mString
+        module procedure equalByString_fu_mString    
+        module procedure equalByCharacter_fu_mString
     end interface
 
     interface operator(+)
@@ -124,15 +125,20 @@ contains
         endif
     end subroutine
 
-    function equal_fu_mString(lhs, rhs) result(equals)
-        type(fu_string), intent(in) :: lhs, rhs
+    function equalByString_fu_mString(string1, string2) result(equals)
+        type(fu_string), intent(in) :: string1, string2
         logical(fu_lgtype)          :: equals
 
-        equals = .false.
-        if (lhs%length /= rhs%length) return
-        if (lhs%text /= rhs%text) return
-        equals= .true.
+        equals = string1%equals(string2)
     end function
+    
+    function equalByCharacter_fu_mString(string, text) result(equals)
+        type(fu_string), intent(in)  :: string
+        character(len=*), intent(in) :: text
+        logical(fu_lgtype)           :: equals
+
+        equals = string%equals(text)
+    end function    
 
     function addString_fu_mString(string1, string2) result(addition)
         type(fu_string), intent(in) :: string1, string2
@@ -162,19 +168,21 @@ contains
         integer(fu_itype), intent(in)       :: scalar
         type(fu_string)                     :: sproduct
 
-        character(len=scalar*string%length) :: text
-        integer(fu_itype)                   :: i
+        character(len=:), allocatable       :: text
+        integer(fu_itype)                   :: i, length
 
-        if (scalar == 0 .or. string%length == 0) then
+        if (scalar == 0 .or. string%getLength() == 0) then
             sproduct = fu_string()
             return
         endif
-
-        text = string%text
+        length = string%getlength()
+        allocate(character(len=scalar*length) :: text) 
+        text = string%getText()
         do i=2, scalar
-            text = text//string%text
+            text = text//string%getText()
         enddo
         sproduct = fu_string(text)
+        deallocate(text)
     end function
 
     function productScalarString_fu_mString(scalar, string) result(sproduct)
@@ -186,25 +194,29 @@ contains
     end function
     
     function substractionStringCharacter_fu_mString(string, text) result(resString)
-        type(fu_string), intent(in)  :: string
-        character(len=*), intent(in) :: text
-        type(fu_string)              :: resString
-        character(len=string%length) :: auxText
-        integer(fu_itype)            :: nchar, ichar
+        type(fu_string), intent(in)   :: string
+        character(len=*), intent(in)  :: text
+        type(fu_string)               :: resString
+        character(len=string%length)  :: auxText
+        integer(fu_itype)             :: nchar, ichar, slength
+        character(len=:), allocatable :: stext
         
-        resString = fu_string(string%text)
+        slength = string%getLength()
+        stext = string%getText()
         nchar = len_trim(text)
         if (nchar < 1) return
-        if (nchar > string%length) return
+        if (nchar > slength) return
         resString = fu_string()
         ichar = 1
         auxText = ""
         do
-            if (ichar > string%length-nchar) exit
-            if (string%text(ichar:ichar+nchar) == text) then
+            if (ichar > slength-nchar) exit
+            print *, stext(ichar:ichar+nchar-1)
+            if (stext(ichar:ichar+nchar-1) == text) then
                 ichar = ichar + nchar
             else
-                auxText = auxText//string%text(ichar:ichar)
+                print *, stext(ichar:ichar)
+                auxText = auxText//stext(ichar:ichar)
             endif
             ichar = ichar + 1
         enddo
