@@ -197,30 +197,36 @@ contains
         type(fu_string), intent(in)   :: string
         character(len=*), intent(in)  :: text
         type(fu_string)               :: resString
-        character(len=string%length)  :: auxText
+        character(len=:), allocatable :: auxText, stext
         integer(fu_itype)             :: nchar, ichar, slength
-        character(len=:), allocatable :: stext
+        logical                       :: firstLetter
         
         slength = string%getLength()
         stext = string%getText()
-        nchar = len_trim(text)
+        allocate(character(len=slength) :: auxText)
+        nchar = len(text)
         if (nchar < 1) return
         if (nchar > slength) return
         resString = fu_string()
         ichar = 1
-        auxText = ""
+        firstLetter = .true.
         do
-            if (ichar > slength-nchar) exit
-            print *, stext(ichar:ichar+nchar-1)
+            if (ichar > slength) exit
             if (stext(ichar:ichar+nchar-1) == text) then
-                ichar = ichar + nchar
+                ichar = ichar + nchar-1
             else
-                print *, stext(ichar:ichar)
-                auxText = auxText//stext(ichar:ichar)
+                if (firstLetter) then
+                    auxText = stext(ichar:ichar)
+                    firstLetter = .false.
+                else
+                    auxText = auxText//stext(ichar:ichar)
+                endif
             endif
             ichar = ichar + 1
         enddo
         resString = fu_string(auxText)
+        if (allocated(stext)) deallocate(stext)
+        if (allocated(auxText)) deallocate(auxText)
     end function
     
     function substractionStringString_fu_mString(string1, string2) result(resString)

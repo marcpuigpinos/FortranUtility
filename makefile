@@ -16,7 +16,12 @@ print_vars:
 	@echo $(SRC)
 	@echo $(OBJ)
 	@echo $(OS)
-	@echo rm -r $(BUILD)\* $(OBJF)\*	
+	@echo rm -r $(BUILD)\* $(OBJF)\*
+
+.PHONY: copy_test
+
+copy_test:
+	cp $(BUILD)/* Tests/FortranUtilityTests/LibraryToTest/gnu  
 	
 all: $(MAIN)
 

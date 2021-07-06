@@ -4,7 +4,7 @@ program FortranUtilityTest
     
     implicit none
     
-    type(fu_string) :: helloName
+    type(fu_string) :: helloName, world
     character(len=4) :: name
     
     name = "Marc"
@@ -16,8 +16,14 @@ program FortranUtilityTest
     call write(helloName)
     helloName = helloName * 3
     call write(helloName)
-    helloName = helloName - "Marc"
+    helloName = helloName - " Marc"
     call write(helloName)
+    helloName = helloName - "Hello "
+    call write(helloName)
+    world = fu_string("World")
+    helloName = helloName - world
+    call write(helloName)
+
     helloName = fu_string()
     print *, helloName%isEmpty()
     helloName = fu_string("Barbera del Valles")
@@ -26,6 +32,8 @@ program FortranUtilityTest
     call helloName%upcase()
     call helloName%write()
     call helloName%downcase()
+    call helloName%write()
+    helloName = helloName - " "
     call helloName%write()
     
     stop
