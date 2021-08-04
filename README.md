@@ -2,7 +2,7 @@
 
 ## String module
 
-This module contains the string type as well as all the module procedures. The example below show a simple example of how to use this moudule and call its procedures.
+This module contains the string type as well as all the module procedures. Below it is shown a simple example of how to use this moudule and call its procedures.
 
     use fu_mString
 
