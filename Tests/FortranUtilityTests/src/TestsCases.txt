@@ -1,8 +1,0 @@
-# fu_string
--------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-## Test 1
-Initialize string with text "Hello World!". Check that the string%getText() returns the string "Hello World!".
-
-## Test 2
-Initialize string with text "Hello World!". Check that len("Hello World!") is equal to string%getLength().
