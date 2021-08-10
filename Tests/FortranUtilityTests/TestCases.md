@@ -1,4 +1,4 @@
-# Fortran utility Test Cases.
+# Fortran Utility Test Cases.
 
 ## fu_mString
 
@@ -24,18 +24,63 @@
 - Test failed: False.
 
 #### Test M4: Assignment operator with empty text.
-- Declare a fu_string object.
+- Declare a string object.
 - Initialize it by assigning the text "".
-- Call the object method isEmpty() and check the return.
+- Call the object method isEmpty() and check the return value.
 - Test passed: True.
-- Test passed: False.
+- Test failed: False.
 
 #### Test M5: Assignment operator with text.
-- Declare a fu_string object.
+- Declare a string object.
 - Initialize it by assigning the text "Hello".
 - Compare the string with the text "Hello".
 - Test passed: True.
-- Test passed: False.
+- Test failed: False.
+
+#### Test M6: Assignment operator with string.
+- Initialize a string object with text "Abomination".
+- Declare a string object.
+- Assign to the second string object, the first string object.
+- Compare the two strings and check the return value.
+- Test passed: True.
+- Test failed: False.
+
+#### Test M7: Append string and string with + operator.
+- Initialize a string object with text "Hello ".
+- Initialize a second string object with text "world!.".
+- Declare a third string object and assign it to the sum of the other two.
+- Compare the third string with text "Hello world!.".
+- Test passed: True.
+- Test failed: False.
+
+#### Test M8: Append string and text with + operator.
+- Initialize a string object with text "Hello ".
+- Declare a string string object and assign it to the sum of the first string and the text "world!.".
+- Compare the second string with text "Hello world!."
+- Test passed: True.
+- Test failed: False.
+
+#### Test M9: Append text and string with + operator.
+- Initialize a string object with text "world!.".
+- Declare a string object and assign it to the sum of the text "Hello " and the string.
+- Compare the second string with text "Hello world!."
+- Test passed: True.
+- Test failed: False.
+
+#### Test M10: Substract a text from a string with - operator.
+- Initialize a string object with text "Hello world!.".
+- Declare a string object and assign it to the substraction of the string and the text "!".
+- Compare the second string with the text "Hello world.".
+- Test passed: True.
+- Test failed: False.
+
+#### Test M11: Substract a string from a string with - operator.
+- Initialize a string object with text "Hello world!.".
+- Initialize a second string object with text "!".
+- Declare a string object and assign it to the substraction of the first string and the second one.
+- Compare the third string with the text "Hello world.".
+- Test passed: True.
+- Test failed: False.
 
 ### fu_string tests
 
@@ -65,3 +110,29 @@
 - Get the text of the first string object and compare it with "Hello, Biel.".
 - Test passed: True.
 - Test failed: False.
+
+#### Test T5: String contains text.
+- Initialize a string with text "Hello World".
+- Call string method contains and pass the text argument "World".
+- Test passed: True.
+- Test failed: False.
+- 
+#### Test T6: String not contains text.
+- Initialize a string with text "Hello World".
+- Call string method contains and pass the text argument "Puma".
+- Test passed: False.
+- Test failed: True.
+
+#### Test T5: String contains string.
+- Initialize a string with text "Hello World".
+- Initialize a second string with text "World"
+- Call first string method contains and pass the second string as argument.
+- Test passed: True.
+- Test failed: False.
+- 
+#### Test T6: String not contains text.
+- Initialize a string with text "Hello World".
+- Initialize a second string with text "Puma"
+- Call first string method contains and pass the second string as argument.
+- Test passed: False.
+- Test failed: True.
