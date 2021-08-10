@@ -25,25 +25,25 @@ module fu_mString
         procedure, public  :: getText                   => getText_fu_string
         procedure, public  :: getLength                 => getLength_fu_string
         procedure, public  :: charAt                    => charAt_fu_string
-        procedure, private :: concatCharacter           => concatCharacter_fu_string
+        procedure, private :: concatText                => concatText_fu_string
         procedure, private :: concatString              => concatString_fu_string
         generic, public    :: concat                    => concatString,&
-                                                           concatCharacter
-        procedure, private :: containsCharacter         => containsCharacter_fu_string
+                                                           concatText
+        procedure, private :: containsText              => containsText_fu_string
         procedure, private :: containsString            => containsString_fu_string
-        generic, public    :: contains                  => containsCharacter,&
+        generic, public    :: contains                  => containsText,&
                                                            containsString
-        procedure, private  :: endsWithCharacter        => endsWithCharacter_fu_string
+        procedure, private  :: endsWithText             => endsWithText_fu_string
         procedure, private  :: endsWithString           => endsWithString_fu_string
-        generic, public     :: endsWith                 => endsWithCharacter,&
+        generic, public     :: endsWith                 => endsWithText,&
                                                            endsWithString
-        procedure, private :: equalsToCharacter         => equalsToCharacter_fu_string
+        procedure, private :: equalsToText              => equalsToText_fu_string
         procedure, private :: equalsToString            => equalsToString_fu_string
-        generic, public    :: equals                    => equalsToCharacter,&
+        generic, public    :: equals                    => equalsToText,&
                                                            equalsToString
-        procedure, private :: equalsIgnoreCaseCharacter => equalsIgnoreCaseCharacter_fu_string
+        procedure, private :: equalsIgnoreCaseText      => equalsIgnoreCaseText_fu_string
         procedure, private :: equalsIgnoreCaseString    => equalsIgnoreCaseString_fu_string
-        generic, public    :: equalsIgnoreCase          => equalsIgnoreCaseCharacter,&
+        generic, public    :: equalsIgnoreCase          => equalsIgnoreCaseText,&
                                                            equalsIgnoreCaseString
         procedure, public  :: isEmpty                   => isEmpty_fu_string
         procedure, public  :: upcase                    => upcase_fu_string
@@ -62,18 +62,19 @@ module fu_mString
     end interface
 
     interface assignment(=)
-        module procedure assignment_fu_mString
+        module procedure assignmentByText_fu_mString
+        module procedure assignmentByString_fu_mString
     end interface
 
     interface operator(==)
         module procedure equalByString_fu_mString    
-        module procedure equalByCharacter_fu_mString
+        module procedure equalByText_fu_mString
     end interface
 
     interface operator(+)
         module procedure addString_fu_mString
-        module procedure addStringCharacter_fu_mString
-        module procedure addCharacterString_fu_mString
+        module procedure addStringText_fu_mString
+        module procedure addTextString_fu_mString
     end interface
 
     interface operator(*)
@@ -82,7 +83,7 @@ module fu_mString
     end interface
 
     interface operator(-)
-        module procedure substractionStringCharacter_fu_mString
+        module procedure substractionStringText_fu_mString
         module procedure substractionStringString_fu_mString
     end interface
 
@@ -113,7 +114,18 @@ contains
         rstring%length = len(text)
     end function
 
-    subroutine assignment_fu_mString(lhs, rhs)
+    subroutine assignmentByText_fu_mString(lhs, rhs)
+        type(fu_string), intent(out) :: lhs
+        character(len=*), intent(in) :: rhs
+        if (rhs == "") then
+            lhs = fu_string()
+        else
+            lhs = fu_string(rhs)
+        endif
+        return
+    end subroutine
+    
+    subroutine assignmentByString_fu_mString(lhs, rhs)
         type(fu_string), intent(out) :: lhs
         type(fu_string), intent(in)   :: rhs
 
@@ -132,7 +144,7 @@ contains
         equals = string1%equals(string2)
     end function
     
-    function equalByCharacter_fu_mString(string, text) result(equals)
+    function equalByText_fu_mString(string, text) result(equals)
         type(fu_string), intent(in)  :: string
         character(len=*), intent(in) :: text
         logical(fu_lgtype)           :: equals
@@ -147,7 +159,7 @@ contains
         addition = fu_string(string1%text//string2%text)
     end function
 
-    function addStringCharacter_fu_mString(string, text) result(addition)
+    function addStringText_fu_mString(string, text) result(addition)
         type(fu_string), intent(in)  :: string
         character(len=*), intent(in) :: text
         type(fu_string)              :: addition
@@ -155,7 +167,7 @@ contains
         addition = fu_string(string%text//text)
     end function
 
-    function addCharacterString_fu_mString(text, string) result(addition)
+    function addTextString_fu_mString(text, string) result(addition)
         character(len=*), intent(in) :: text
         type(fu_string), intent(in)  :: string
         type(fu_string)              :: addition
@@ -193,7 +205,7 @@ contains
         sproduct = productStringScalar_fu_mString(string, scalar)
     end function
     
-    function substractionStringCharacter_fu_mString(string, text) result(resString)
+    function substractionStringText_fu_mString(string, text) result(resString)
         type(fu_string), intent(in)   :: string
         character(len=*), intent(in)  :: text
         type(fu_string)               :: resString
@@ -233,7 +245,7 @@ contains
         type(fu_string), intent(in)  :: string1, string2
         type(fu_string)              :: resString    
         
-        resString = substractionStringCharacter_fu_mString(string1, string2%text)
+        resString = substractionStringText_fu_mString(string1, string2%text)
     end function
 
     subroutine writeOnScreen_fu_mString(string)
@@ -272,7 +284,7 @@ contains
         charAt = this%text(indexChar:indexChar)
     end function
 
-    subroutine concatCharacter_fu_string(this, text)
+    subroutine concatText_fu_string(this, text)
         class(fu_string), intent(inout) :: this
         character(len=*), intent(in)    :: text
         this%length = this%length + len(text)
@@ -286,7 +298,7 @@ contains
         this%text = this%text//cstring%text
     end subroutine
 
-    function containsCharacter_fu_string(this, text) result(found)
+    function containsText_fu_string(this, text) result(found)
         class(fu_string), intent(in) :: this
         character(len=*), intent(in) :: text
         logical(fu_lgtype)           :: found
@@ -302,10 +314,10 @@ contains
         type(fu_string), intent(in)  :: cstring
         logical(fu_lgtype)           :: found
 
-        found = this%containsCharacter(cstring%text)
+        found = this%containsText(cstring%text)
     end function
 
-    function endsWithCharacter_fu_string(this, text) result(lend)
+    function endsWithText_fu_string(this, text) result(lend)
         class(fu_string), intent(in) :: this
         character(len=*), intent(in) :: text
         logical(fu_lgtype)           :: lend
@@ -330,10 +342,10 @@ contains
         type(fu_string), intent(in)  :: cstring
         logical(fu_lgtype)           :: lend
 
-        lend = this%endsWithCharacter(cstring%text)
+        lend = this%endsWithText(cstring%text)
     end function
 
-    function equalsToCharacter_fu_string(this, text) result(equals)
+    function equalsToText_fu_string(this, text) result(equals)
         class(fu_string), intent(in) :: this
         character(len=*), intent(in) :: text
         logical(fu_lgtype)           :: equals
@@ -348,10 +360,10 @@ contains
         type(fu_string), intent(in)  :: cstring
         logical(fu_lgtype)           :: equals
 
-        equals = this%equalsToCharacter(cstring%text)
+        equals = this%equalsToText(cstring%text)
     end function
 
-    function equalsIgnoreCaseCharacter_fu_string(this, text) result(equals)
+    function equalsIgnoreCaseText_fu_string(this, text) result(equals)
         class(fu_string), intent(in) :: this
         character(len=*), intent(in) :: text
         logical(fu_lgtype)           :: equals
