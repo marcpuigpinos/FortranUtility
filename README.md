@@ -4,13 +4,15 @@
 
 This module contains the string type as well as all the module procedures. Below it is shown a simple example of how to use this moudule and call its procedures.
 
-    use fu_mString
+```
+use fu_mString
 
-    type(fu_string) :: name 
+type(fu_string) :: name 
 
-    name = fu_string("Orange") !Initialize name with "Orange" text.
+name = fu_string("Orange") !Initialize name with "Orange" text.
 
-    name = fu_string() !Default initializer to empty string.
+name = fu_string() !Default initializer to empty string.
+```
 
 ### Public module procedures
 
@@ -20,57 +22,75 @@ The fu_mString public module procedures are listed below:
 
 - `write`: Given a string, writes the string on screen or unit.
 
-    call write(stringA)
-
-    call write(stringA, unit)
+```
+call write(stringA)
+    
+call write(stringA, unit) 
+```
 
 ### Operators
 
 - `=`: Assigns the value of one string to another.
 
-    stringB = stringA
+```
+stringB = stringA
+```
 
 - `==`: Compares one string to another or a string to a text.
 
-    equal = stringA == stringB
+```
+equal = stringA == stringB
 
-    equal = stringA == "Some text"
+equal = stringA == "Some text"
+```    
 
 - `+`: Concatenates two strings or a string and some text.
 
-    stringC = stringA + stringB
+```
+stringC = stringA + stringB
 
-    stringC = stringA + "Some text"
+stringC = stringA + "Some text"
+```   
 
 - `*`: Repeat the string as many times as the scalar number is multiplied with. The scalar number must be an integer.
 
-    stringA = fu_string("Hello")
+```
+stringA = fu_string("Hello")
     
-    stringB = 3 * stringA
+stringB = 3 * stringA
     
-    call write(stringB)
+call write(stringB)
+```     
 
-    output:
+output:
     
-    HelloHelloHello
+```    
+HelloHelloHello
+```
 
 - `-`: Substracts a string or text from another string.
 
-    stringA = fu_string("Hello, this is my home")
+```
+stringA = fu_string("Hello, this is my home")
 
-    stringB = fu_string("home")
+stringB = fu_string("home")
 
-    stringC = stringA - stringB
+stringC = stringA - stringB
+```    
 
-    or
+or
 
-    stringC = stringA - "home"
+```
+stringC = stringA - "home"
 
-    call write(stringC)
+call write(stringC)
+```    
 
-    output:
+output:
 
-    "Hello, this is my "
+```
+Hello, this is my 
+```    
 
 ### Type bound procedures
 
@@ -83,23 +103,28 @@ The string type contains the following procedures:
 - `charAt`: Returns the character at some index of the string object. 
       
 - `concat`: Given a string or a text, the object string is concatenated with the inputs.
-  
-    call stringA%concat(stringB)
-  
-    call stringA%concat("Some Text")
 
-                                                    
+```
+call stringA%concat(stringB)
+  
+call stringA%concat("Some Text")
+```
+                                                 
 - `contains`: Given a string or a text, returns if it is contained by the object string.
 
-    found = stringA%concat(stringB)
+```
+found = stringA%concat(stringB)
   
-    found = stringA%concat("text")
+found = stringA%concat("text")
+```    
                                                      
 - `endsWith`: Given a string or a text, returns if the object string ends with the given arguments.
+
+```
+ends = stringA%endsWith(stringB)
   
-    ends = stringA%endsWith(stringB)
-  
-    ends = stringA%endsWith("text")    
+ends = stringA%endsWith("text")    
+```
                     
 - `equals`: Given a string or a text, returns a true if the inputs are equal to the object string. 
                  
@@ -113,6 +138,8 @@ The string type contains the following procedures:
 
 - `write`: Writes the object on screen or unit.
 
-    call string%write()
+```
+call string%write()
   
-    call string%write(unit)
+call string%write(unit)
+```
