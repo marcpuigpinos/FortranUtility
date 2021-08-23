@@ -69,6 +69,7 @@ module fu_mString
     interface operator(==)
         module procedure equalByString_fu_mString    
         module procedure equalByText_fu_mString
+        module procedure equalByTextString_fu_mString
     end interface
 
     interface operator(+)
@@ -150,7 +151,15 @@ contains
         logical(fu_lgtype)           :: equals
 
         equals = string%equals(text)
-    end function    
+    end function   
+    
+    function equalByTextString_fu_mString(text, string) result(equals)
+        character(len=*), intent(in) :: text
+        type(fu_string), intent(in)  :: string
+        logical(fu_lgtype)           :: equals
+
+        equals = string%equals(text)
+    end function     
 
     function addString_fu_mString(string1, string2) result(addition)
         type(fu_string), intent(in) :: string1, string2
@@ -332,7 +341,7 @@ contains
         if (textLength == this%length) then
             if (text == this%text) lend = .true.
         else
-            start = this%length - textLength
+            start = this%length - textLength + 1
             if (this%text(start:this%length) == text) lend = .true.
         endif
     end function

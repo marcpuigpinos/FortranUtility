@@ -116,128 +116,127 @@
 - Call string method `obj%contains(arg)` and pass the text argument "World".
 - Test passed: True.
 - Test failed: False.
- 
+
 #### Test T6: String not contains text.
 - Initialize a string object with text "Hello World".
 - Call string method `obj%contains(arg)` and pass the text argument "Puma".
 - Test passed: False.
 - Test failed: True.
 
-#### Test T5: String contains string.
+#### Test T7: String contains string.
 - Initialize a string object with text "Hello World".
 - Initialize a second string object with text "World".
 - Call first string method `obj%contains(arg)` and pass the second string as argument.
 - Test passed: True.
 - Test failed: False.
 
-#### Test T6: String not contains text.
+#### Test T8: String not contains string.
 - Initialize a string object with text "Hello World".
 - Initialize a second string object with text "Puma".
 - Call first string method `obj%contains(arg)` and pass the second string as argument.
 - Test passed: False.
 - Test failed: True.
 
-#### Test T7: String ends with text.
+#### Test T9: String ends with text.
 - Initialize string object with text "Hello World".
 - Call the string method `obj%endsWith(arg)` and pass the argument "World".
 - Test passed: True.
 - Test failed: False.
 
-#### Test T8: String not ends with text.
+#### Test T10: String not ends with text.
 - Initialize string object with text "Hello World".
 - Call the string method `obj%endsWith(arg)` and pass the argument "puma".
 - Test passed: False.
 - Test failed: True.
 
-#### Test T9: String ends with string.
+#### Test T11: String ends with string.
 - Initialize string object with text "Hello World".
 - Initialize a second string object with text "World".
 - Call the first string method `obj%endsWith(arg)`and pass the second string as argument.
 - Test passed: True.
 - Test failed: False.
 
-#### Test T10: String not ends with string.
+#### Test T12: String not ends with string.
 - Initialize string object with text "Hello World".
 - Initialize a second string object with text "puma".
 - Call the first string method `obj%endsWith(arg)`and pass the second string as argument.
 - Test passed: False.
 - Test failed: True.
 
-#### Test T11: String equals to text.
+#### Test T13: String equals to text.
 - Initialize a string object with text "Hello World".
 - Call the string method `obj%equals(arg)` and pass as argument the text "Hello World".
 - Test passed: True.
 - Test failed: False.
 
-#### Test T12: String not equals to text.
+#### Test T14: String not equals to text.
 - Initialize a string object with text "Hello World".
 - Call the string method `obj%equals(arg)` and pass as argument the text "puma".
 - Test passed: False.
 - Test failed: True.
 
-#### Test T13: String equals to string.
+#### Test T15: String equals to string.
 - Initialize string object with text "Hello World".
 - Initialize a second string object with text "Hello World".
 - Call the first string method `obj%equals(arg)`and pass the second string as argument.
 - Test passed: True.
 - Test failed: False.
 
-#### Test T14: String not equals to string.
+#### Test T16: String not equals to string.
 - Initialize string object with text "Hello World".
 - Initialize a second string object with text "puma".
 - Call the first string method `obj%equals(arg)`and pass the second string as argument.
 - Test passed: False.
 - Test failed: True.
 
-#### Test T15: String equals ignoring case to text.
+#### Test T17: String equals ignoring case to text.
 - Initialize a string object with text "Hello World".
 - Call the string method `obj%equalsIgnoreCase(arg)` and pass as argument the text "hElLo wOrLd".
 - Test passed: True.
 - Test failed: False.
 
-#### Test T16: String not equals ignoring case to text.
+#### Test T18: String not equals ignoring case to text.
 - Initialize a string object with text "Hello World".
 - Call the string method `obj%equalsIgnoreCase(arg)` and pass as argument the text "pUmA".
 - Test passed: False.
 - Test failed: True.
 
-#### Test T17: String equals ignoring case to string.
+#### Test T19: String equals ignoring case to string.
 - Initialize string object with text "Hello World".
 - Initialize a second string object with text "hElLo wOrLd".
 - Call the first string method `obj%equalsIgnoreCase(arg)`and pass the second string as argument.
 - Test passed: True.
 - Test failed: False.
 
-#### Test T18: String not equals ignoring case to string.
+#### Test T20: String not equals ignoring case to string.
 - Initialize string object with text "Hello World".
 - Initialize a second string object with text "pUmA".
 - Call the first string method `obj%equalsIgnoreCase(arg)`and pass the second string as argument.
 - Test passed: False.
 - Test failed: True.
 
-#### Test T19: String is empty.
+#### Test T21: String is empty.
 - Initialize a string object by default.
 - Call string method `obj%isEmpty()`.
 - Test passed: True.
 - Test failed: False.
 
-#### Test T20: String is not empty.
+#### Test T22: String is not empty.
 - Initialize a string object with text "Hello".
 - Call string method `obj%isEmpty()`.
 - Test passed: False.
 - Test failed: True.
 
-#### Test T21: String upcase.
+#### Test T23: String upcase.
 - Initialize a string object with text "hello".
 - Call string method `obj%upcase()`.
 - Compare the string with the text "HELLO" by using the `==` operator.
 - Test passed: True.
 - Test failed: False.
 
-#### Test T22: String downcase.
+#### Test T24: String downcase.
 - Initialize a string object with text "HELLO".
 - Call string method `obj%downcase()`.
 - Compare the string with the text "hello" by using the `==` operator.
 - Test passed: True.
 - Test failed: False.
-
