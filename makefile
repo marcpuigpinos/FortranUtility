@@ -22,6 +22,9 @@ print_vars:
 
 copy_test:
 	cp $(BUILD)/* Tests/FortranUtilityTests/LibraryToTest/gnu  
+
+copy_test_win:
+	copy $(BUILD)\* Tests\FortranUtilityTests\LibraryToTest\gnu  
 	
 all: $(MAIN)
 
