@@ -18,7 +18,7 @@ It is also possible to download a zip file from this url: https://github.com/mar
 
 A Visual Studio 2019 project can be found in [folder](Projects). Uncompress the file VisualStudio2019 and place the solution and project file into the main directory. This project is only tested using the Intel OneApi compilers, that have fully integration with Visual Studio 2019. This method **ONLY works for Windows**. 
 
-The project for the test of the library can be found in this [folder](Tests\FortranUtilityTests\projects).
+The project for the test of the library can be found in this [folder](Tests/FortranUtilityTests/projects).
 
 ### Makefile and GNU compilers
 
