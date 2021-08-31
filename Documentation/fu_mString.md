@@ -111,9 +111,9 @@ call stringA%concat("Some Text")
 - `contains`: Given a string or a text, returns if it is contained by the object string.
 
 ```fortran
-found = stringA%concat(stringB)
+found = stringA%contains(stringB)
   
-found = stringA%concat("text")
+found = stringA%contains("text")
 ```
 
 - `endsWith`: Given a string or a text, returns if the object string ends with the given arguments.
