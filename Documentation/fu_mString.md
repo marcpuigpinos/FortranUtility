@@ -31,6 +31,7 @@ call write(stringA, unit)
 - `=`: Assigns the value of one string to another.
 
 ```fortran
+stringA = "Hello World!"
 stringB = stringA
 ```
 
